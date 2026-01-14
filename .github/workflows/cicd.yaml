@@ -61,7 +61,7 @@ jobs:
       - name: Deploy to Container to GCP
         run: |
           gcloud compute ssh ubuntu@instance-20260114-104743 \
-            --zone=us-central1-a \
+            --zone=us-central1-c \
             --command="
               docker pull ${{ secrets.DOCKERHUB_USERNAME }}/artiset-assignment:${{ env.IMAGE_TAG }} &&
               docker stop app || true &&
