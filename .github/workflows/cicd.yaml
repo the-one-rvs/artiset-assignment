@@ -31,6 +31,8 @@ jobs:
 
       - name: Run basic test
         run: |
+          docker run -d -p 5000:5000 --name test_container ${{ secrets.DOCKERHUB_USERNAME }}/artiset-assignment:${{ env.IMAGE_TAG }}
+          sleep 5
           chmod +x test.sh
           ./test.sh
     
