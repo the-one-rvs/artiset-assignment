@@ -51,7 +51,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/artiset-assignment:${{ env.IMAGE_TAG }}
       
-      ##Here Start CD Pipeline to deploy on GCP
+      ## Here Start CD Pipeline to deploy on GCP
       
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
