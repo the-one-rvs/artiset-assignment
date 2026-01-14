@@ -31,16 +31,9 @@ jobs:
 
       - name: Run basic test
         run: |
-          mkdir -p test-output
-          docker run -d -p 5000:5000 --name test_container \
-            ${{ secrets.DOCKERHUB_USERNAME }}/artiset-assignment:${{ env.IMAGE_TAG }}
-
-          sleep 5
-          curl -v http://localhost:5000 | tee test-output/result.txt
-          grep "Hello World from Flask!" test-output/result.txt
-
-          docker stop test_container
-
+          chmod +e test.sh
+          ./test.sh
+    
       - name: Upload test artifact
         uses: actions/upload-artifact@v4
         with:
@@ -60,7 +53,7 @@ jobs:
 
       - name: Deploy to Container to GCP
         run: |
-          gcloud compute ssh ubuntu@instance-20260114-104743 \
+          gcloud compute ssh ubuntu@instance-20260114-132435 \
             --zone=us-central1-c \
             --command="
               docker pull ${{ secrets.DOCKERHUB_USERNAME }}/artiset-assignment:${{ env.IMAGE_TAG }} &&
